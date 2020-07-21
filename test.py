@@ -1,6 +1,3 @@
-'''
-Test if GrobidClient works
-'''
 
 import argparse
 from grobid.client import GrobidClient
@@ -22,11 +19,13 @@ if __name__ == "__main__":
     client = GrobidClient(args.host, args.port)
 
     # /processHeaderDocument without consolidate
-    rsp = client.serve("processHeaderDocument", args.pdf,
-                       consolidate_header=args.consolidate)
+
+    rsp, status = client.serve("processHeaderDocument", args.pdf,
+                               consolidate_header=args.consolidate)
     if args.consolidate == 1:
         result = "with"
     else:
         result = "WITHOUT"
     msg = f"process header Document {result} consolidate"
-    print(msg, len(rsp))
+    print(msg)
+    print(rsp.text)
