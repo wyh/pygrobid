@@ -3,7 +3,7 @@ Test if GrobidClient works
 '''
 
 import argparse
-from grobid import GrobidClient
+from grobid.client import GrobidClient
 
 parser = argparse.ArgumentParser(
     description='Obtain host and port of Grobid Server')
