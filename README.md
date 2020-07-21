@@ -18,14 +18,12 @@ pip install pygrobid
 
 ## Usage and options
 
-```
-
 You can take a quick test via `python tests.py pdf_file -h host -p port`
 
 In your code: 
 
 ```  
-from pygrobid import GrobidClient
+from grobid.client import GrobidClient
 
 client = GrobidClient(host, port)
 rsp = client.serve(service_name, pdf_file)
