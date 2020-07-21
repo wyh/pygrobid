@@ -243,7 +243,10 @@ class GrobidClient(ApiClient):
                               "formula"]
               ):
 
-        files = {'input': open(pdf_file, 'rb')}
+        if type(pdf_file) == str:
+            files = {'input': open(pdf_file, 'rb')}
+        else:
+            files = {'input': pdf_file}
 
         url = f"{self.url}/api/{service}"
 
