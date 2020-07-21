@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from distutils.core import setup
+from setuptools import setup
 
 
 with open("README.md", "r") as fh:
@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="pygrobid",
-    version="0.1.0",
+    version="0.1.2",
     author="Samuel.Wu",
     author_email="samuel.yh.wu@gmail.com",
     description="A python client for Grobid service",

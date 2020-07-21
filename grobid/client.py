@@ -254,14 +254,11 @@ class GrobidClient(ApiClient):
             "consolidateCitations": consolidate_citations,
         }
 
-        res, status = self.post(
+        rsp, status = self.post(
             url=url,
             files=files,
             data=the_data,
             headers={'Accept': 'text/plain'}
         )
 
-        if status == 200:
-            return res.text
-
-        raise status
+        return rsp, status
