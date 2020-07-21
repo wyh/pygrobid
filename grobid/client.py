@@ -226,6 +226,8 @@ class ApiClient(object):
 class GrobidClient(ApiClient):
 
     def __init__(self, host="localhost", port="8080"):
+        if not host.startswith("http"):
+            host = "http://" + host
         self.host = host
         self.port = port
         self.url = f"{self.host}:{self.port}"
