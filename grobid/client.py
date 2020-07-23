@@ -235,7 +235,7 @@ class GrobidClient(ApiClient):
     def test_alive(self):
         url = f"{self.url}/api/isalive"
         rsp = requests.get(url)
-        return rsp.status == 200
+        return rsp.status_code == 200
 
     def serve(self, service, pdf_file, generateIDs=1, consolidate_header="0",
               consolidate_citations=0,
