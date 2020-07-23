@@ -4,7 +4,7 @@ This Python client is used to process a single PDF document by the  [GROBID](htt
 
 ## Build and run
 
-You need first to install and start the *grobid* service, latest stable version, see the [documentation](http://grobid.readthedocs.io/).  The default server host is `localhost` and port is `8081`.  The `GrobidClient` can be configure via host and port. 
+You need first to install and start the *grobid* service, latest stable version, see the [documentation](http://grobid.readthedocs.io/).  The default server host is `localhost` and port is `8080`.  The `GrobidClient` can be configure via host and port. 
 
 ## Requirements
 

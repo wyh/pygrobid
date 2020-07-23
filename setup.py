@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="pygrobid",
-    version="0.1.3",
+    version="0.1.5",
     author="Samuel.Wu",
     author_email="samuel.yh.wu@gmail.com",
     description="A python client for Grobid service",
