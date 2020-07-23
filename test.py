@@ -18,6 +18,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     client = GrobidClient(args.host, args.port)
 
+    # test if client is alive
+    print("Grobid Server is alive?", client.test_alive())
     # /processHeaderDocument without consolidate
 
     rsp, status = client.serve("processHeaderDocument", args.pdf,
