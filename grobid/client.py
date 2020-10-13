@@ -255,6 +255,7 @@ class GrobidClient(ApiClient):
             "generateIDs": generateIDs,
             "consolidateHeader": consolidate_header,
             "consolidateCitations": consolidate_citations,
+            "teiCoordinates": teiCoordinates
         }
 
         rsp, status = self.post(
@@ -263,5 +264,7 @@ class GrobidClient(ApiClient):
             data=the_data,
             headers={'Accept': 'text/plain'}
         )
+
+        files["input"].close()
 
         return rsp, status

@@ -31,6 +31,11 @@ rsp = client.serve(service_name, pdf_file, consolidate_header=1)
 
 ``` 
 
+## upgrade history
+
+- 0.1.6: support coordinates
+
 ## Acknoledgement  
 
 This project is based on [grobid-python-client](https://github.com/kermitt2/grobid-client-python) by Patrice Lopez (<patrice.lopez@science-miner.com>)
+

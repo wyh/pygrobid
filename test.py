@@ -1,33 +1,39 @@
-
-import argparse
+import unittest
+import os
 from grobid.client import GrobidClient
+from bs4 import BeautifulSoup
 
-parser = argparse.ArgumentParser(
-    description='Obtain host and port of Grobid Server')
 
-parser.add_argument('pdf', help='PDF files to test')
-parser.add_argument('-s', '--host', default="localhost",
-                    help='Server Host')
-parser.add_argument('-p', '--port', default="8080",
-                    help='Server Port')
-parser.add_argument('-c', '--consolidate', default="0",
-                    help='Consolidate or not')
+class GrobidTest(unittest.TestCase):
+    def setUp(self):
+        host = os.environ['GROBID_HOST']
+        port = os.environ['GROBID_PORT']
+        path = os.path.dirname(__file__)
+        self.pdf = "/".join([path, "scaglia2017.pdf"])
+        self.client = GrobidClient(host, port)
+
+    def test_host_alive(self):
+        self.assertTrue(self.client.test_alive())
+
+    def test_header(self):
+        rsp, status = self.client.serve("processHeaderDocument", self.pdf)
+        soup = BeautifulSoup(rsp.content, 'lxml')
+        self.assertTrue(soup.idno)
+        self.assertTrue(soup.title)
+
+    def test_fulltext(self):
+        rsp, status = self.client.serve("processFulltextDocument", self.pdf)
+        soup = BeautifulSoup(rsp.content, 'lxml')
+        self.assertTrue(soup.idno)
+        self.assertTrue(soup.title)
+        figures = soup.find_all('figure')
+        self.assertEqual(len(figures), 6)
+
+        bibrs = filter(lambda bibr: bibr.has_attr('coords'),
+                       soup.find_all('biblstruct'))
+
+        self.assertEqual(len(list(bibrs)), 67)
 
 
 if __name__ == "__main__":
-    args = parser.parse_args()
-    client = GrobidClient(args.host, args.port)
-
-    # test if client is alive
-    print("Grobid Server is alive?", client.test_alive())
-    # /processHeaderDocument without consolidate
-
-    rsp, status = client.serve("processHeaderDocument", args.pdf,
-                               consolidate_header=args.consolidate)
-    if args.consolidate == 1:
-        result = "with"
-    else:
-        result = "WITHOUT"
-    msg = f"process header Document {result} consolidate"
-    print(msg)
-    print(rsp.text)
+    unittest.main()
